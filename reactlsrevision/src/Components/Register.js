@@ -7,6 +7,7 @@ const Register = () => {
     regEmail: "",
     regPassword: "",
     regConfirmPassword: "",
+    cart: [],
   });
 
   const route = useNavigate();
@@ -19,6 +20,7 @@ const Register = () => {
   };
 
   const { regName, regEmail, regPassword, regConfirmPassword } = regUser;
+
   const submitRegister = (e) => {
     e.preventDefault();
 
@@ -41,6 +43,7 @@ const Register = () => {
             getUser.push(userObj);
             localStorage.setItem("registerUser", JSON.stringify(getUser));
             alert("registered Successfully done");
+            route("/login");
 
             setRegUser({
               regName: "",

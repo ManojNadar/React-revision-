@@ -73,6 +73,11 @@
   font-weight: bolder;
 }
 
+.active {
+  background-color: wheat;
+  border-radius: 5px;
+}
+
 /* Register/login */
 
 .registerScreen {

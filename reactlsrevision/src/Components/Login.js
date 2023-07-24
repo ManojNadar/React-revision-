@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import { MyContext } from "../MyContext/MyContext";
 
 const Login = () => {
   const [loginData, setLoginData] = useState({
     loginEmail: "",
     loginPassword: "",
   });
+
+  const { state, login } = useContext(MyContext);
   const route = useNavigate();
+
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -19,28 +23,32 @@ const Login = () => {
 
     const getUser = JSON.parse(localStorage.getItem("registerUser"));
     const { loginEmail, loginPassword } = loginData;
-    let flag = false;
-    let currentuser;
-    for (let i = 0; i < getUser.length; i++) {
-      if (
-        getUser[i].regEmail === loginEmail &&
-        getUser[i].regPassword === loginPassword
-      ) {
-        flag = true;
-        currentuser = getUser[i];
+    if (loginEmail && loginPassword) {
+      let flag = false;
+      let currentuser;
+      for (let i = 0; i < getUser.length; i++) {
+        if (
+          getUser[i].regEmail === loginEmail &&
+          getUser[i].regPassword === loginPassword
+        ) {
+          flag = true;
+          currentuser = getUser[i];
+        }
       }
-    }
 
-    if (flag) {
-      localStorage.setItem("currentuser", JSON.stringify(currentuser));
-      alert("login success");
-      route("/");
+      if (flag) {
+        login(currentuser);
+        alert("login success");
+        route("/");
+      } else {
+        alert("invalid credentials");
+        setLoginData({
+          loginEmail: "",
+          loginPassword: "",
+        });
+      }
     } else {
-      alert("please fill all the valid details");
-      setLoginData({
-        loginEmail: "",
-        loginPassword: "",
-      });
+      alert("please fill all the fields");
     }
   };
 
