@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const SingleProduct = () => {
   const { id } = useParams();
-  const [singleProduct, setSingleProduct] = useState([]);
+  const [singleProduct, setSingleProduct] = useState({});
 
   const { state } = useContext(MyContext);
   const route = useNavigate();
