@@ -61,7 +61,7 @@
 .rightnav {
   display: flex;
   justify-content: space-between;
-  width: 30%;
+  width: 40%;
   /* border: 1px solid red; */
   align-items: center;
 }

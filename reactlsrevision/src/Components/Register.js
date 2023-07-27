@@ -8,6 +8,7 @@ const Register = () => {
     regPassword: "",
     regConfirmPassword: "",
     cart: [],
+    role: "buyer",
   });
 
   const route = useNavigate();
@@ -19,12 +20,12 @@ const Register = () => {
     setRegUser({ ...regUser, [name]: value });
   };
 
-  const { regName, regEmail, regPassword, regConfirmPassword } = regUser;
+  const { regName, regEmail, regPassword, regConfirmPassword, role } = regUser;
 
   const submitRegister = (e) => {
     e.preventDefault();
 
-    if (regName && regEmail && regPassword && regConfirmPassword) {
+    if (regName && regEmail && role && regPassword && regConfirmPassword) {
       if (regPassword.length > 7) {
         if (regPassword === regConfirmPassword) {
           const getUser =
@@ -72,6 +73,13 @@ const Register = () => {
     }
   };
 
+  function handleRole(e) {
+    const value = e.target.value;
+    setRegUser({ ...regUser, ["role"]: value });
+  }
+
+  console.log(regUser);
+
   return (
     <div className="registerScreen">
       <div className="registerContainer">
@@ -93,6 +101,24 @@ const Register = () => {
             value={regUser.regEmail}
           />
           <br />
+
+          <div
+            style={{ display: "flex", alignItems: "center", margin: "1% 0" }}
+          >
+            <p style={{ width: "20%" }}>Select Role :</p>
+            <select
+              style={{
+                width: "80%",
+                height: "35px",
+                backgroundColor: "aliceblue",
+              }}
+              onChange={handleRole}
+            >
+              <option value="buyer">Buyer</option>
+              <option value="seller">Seller</option>
+            </select>
+          </div>
+
           <input
             type="password"
             placeholder="Enter your password"

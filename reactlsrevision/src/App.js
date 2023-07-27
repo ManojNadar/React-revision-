@@ -7,6 +7,7 @@ import Profile from "./Components/Profile";
 import Register from "./Components/Register";
 import { Route, Routes } from "react-router-dom";
 import SingleProduct from "./Components/SingleProduct";
+import AddProduct from "./Components/AddProduct";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route exact path="/" element={<Home />} />
         <Route exact path="/profile" element={<Profile />} />
         <Route exact path="/products" element={<Products />} />
+        <Route exact path="/addproduct" element={<AddProduct />} />
         <Route exact path="/singleproduct/:id" element={<SingleProduct />} />
         <Route exact path="/cart" element={<Cart />} />
         <Route exact path="/login" element={<Login />} />

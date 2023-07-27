@@ -14,16 +14,6 @@ const Home = () => {
       <Navbar />
       <div className="homeContainer">
         <h2>Home</h2>
-
-        {state?.currentuser ? (
-          <button onClick={() => logout()} className="loginlogout">
-            Logout
-          </button>
-        ) : (
-          <button onClick={() => route("/login")} className="loginlogout">
-            Login
-          </button>
-        )}
       </div>
     </>
   );

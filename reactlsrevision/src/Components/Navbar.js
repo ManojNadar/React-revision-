@@ -1,9 +1,16 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { MyContext } from "../MyContext/MyContext";
 
 const Navbar = () => {
+  const [data, setData] = useState();
   const { state, logout } = useContext(MyContext);
+
+  useEffect(() => {
+    if (state) {
+      setData(state.currentuser);
+    }
+  }, [state]);
 
   const route = useNavigate();
   return (
@@ -19,17 +26,23 @@ const Navbar = () => {
           Products
         </NavLink>
 
-        {state?.currentuser ? (
+        {data ? (
           <div
             style={{
-              width: "70%",
+              width: "80%",
               display: "flex",
               justifyContent: "space-between",
             }}
           >
             <NavLink to="/profile" className="navigations">
-              {state?.currentuser.regName}
+              Profile - {data?.regName}
             </NavLink>
+
+            {data?.role === "seller" ? (
+              <NavLink to="/addproduct" className="navigations">
+                Add Product
+              </NavLink>
+            ) : null}
             <NavLink to="/cart" className="navigations">
               Cart
             </NavLink>
