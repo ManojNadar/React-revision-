@@ -74,7 +74,7 @@
 }
 
 .active {
-  background-color: wheat;
+  background-color: #ececec;
   border-radius: 5px;
 }
 
@@ -144,4 +144,18 @@ input[type="submit"] {
 .loginlogout {
   width: 25%;
   height: 45px;
+}
+
+/* addProductContainer */
+
+.addProductContainer {
+  width: 50%;
+  margin: 0 auto;
+  border: 5px solid black;
+  background-color: aliceblue;
+}
+.addProductContainer > input {
+  width: 90%;
+  margin-left: 5%;
+  outline: none;
 }

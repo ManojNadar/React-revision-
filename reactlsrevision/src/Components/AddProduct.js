@@ -17,6 +17,16 @@ const AddProduct = () => {
       <Navbar />
 
       <h1>Add Product</h1>
+
+      <div className="addProductContainer">
+        <input type="text" placeholder="Product Image URL" />
+        <br />
+        <input type="text" placeholder="Product Title" />
+        <br />
+        <input type="text" placeholder="Product description" />
+        <br />
+        <input type="submit" value="Submit Product" />
+      </div>
     </>
   );
 };
