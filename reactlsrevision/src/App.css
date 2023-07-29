@@ -136,6 +136,15 @@ input[type="submit"] {
   font-size: 1.2em;
 }
 
+.addProductContainer > select {
+  width: 90%;
+  margin-left: 5%;
+  height: 45px;
+  background-color: aliceblue;
+  border: none;
+  border-bottom: 1px solid grey;
+}
+
 /* Home */
 
 .homeContainer {
@@ -150,7 +159,7 @@ input[type="submit"] {
 
 .addProductContainer {
   width: 50%;
-  margin: 0 auto;
+  margin: 2% auto;
   border: 5px solid black;
   background-color: aliceblue;
 }

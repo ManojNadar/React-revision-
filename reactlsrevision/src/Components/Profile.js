@@ -7,11 +7,6 @@ const Profile = () => {
   const { state } = useContext(MyContext);
   const route = useNavigate();
 
-  // useEffect(() => {
-  //   if (!state?.currentuser) {
-  //     route("/login");
-  //   }
-  // }, [state]);
   return (
     <>
       <Navbar />

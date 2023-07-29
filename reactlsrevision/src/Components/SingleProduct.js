@@ -13,15 +13,13 @@ const SingleProduct = () => {
 
   //   console.log(singleProduct);
 
-  const fetchSingleProduct = async () => {
-    const data = await fetch(`https://fakestoreapi.com/products/${id}`);
-    const response = await data.json();
-
-    setSingleProduct(response);
-  };
-
   useEffect(() => {
-    fetchSingleProduct();
+    const getProduct = JSON.parse(localStorage.getItem("products"));
+
+    if (getProduct) {
+      let prodId = getProduct.find((item) => item.id == id);
+      setSingleProduct(prodId);
+    }
   }, []);
 
   const addToCart = (id) => {
