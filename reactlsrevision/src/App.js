@@ -8,6 +8,8 @@ import Register from "./Components/Register";
 import { Route, Routes } from "react-router-dom";
 import SingleProduct from "./Components/SingleProduct";
 import AddProduct from "./Components/AddProduct";
+import Ref from "./Components/Ref";
+import RefTwo from "./Components/RefTwo";
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
         <Route exact path="/cart" element={<Cart />} />
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Register />} />
+        <Route exact path="/ref" element={<Ref />} />
+        <Route exact path="/ref2" element={<RefTwo />} />
       </Routes>
     </>
   );
