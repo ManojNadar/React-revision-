@@ -1,12 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import Navbar from "./Navbar";
-// import { useNavigate } from "react-router-dom";
 import { MyContext } from "../MyContext/MyContext";
 
 const Home = () => {
   const [userHome, setuserHome] = useState();
   const { state } = useContext(MyContext);
-  // const route = useNavigate();
 
   useEffect(() => {
     if (state) {
@@ -14,11 +12,10 @@ const Home = () => {
     }
   }, []);
 
-  // console.log(state);
-
   return (
     <>
       <Navbar />
+
       <div className="homeContainer">
         {state?.currentuser?.role === "seller" ? (
           <h1>Seller Logged in</h1>
@@ -27,6 +24,14 @@ const Home = () => {
         ) : (
           <h2>Home</h2>
         )}
+      </div>
+
+      <div style={{ width: "90%", margin: " 2% auto" }}>
+        <img
+          style={{ width: "100%", height: "400px" }}
+          src="https://img.freepik.com/free-vector/shopping-time-banner-with-realistic-map-cart-gift-bags-vector-illustration_548887-120.jpg"
+          alt=""
+        />
       </div>
     </>
   );

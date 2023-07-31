@@ -12,7 +12,6 @@ const AddProduct = () => {
     price: "",
     category: "Other",
   });
-  const [product, setProduct] = useState([]);
   const { state } = useContext(MyContext);
   const route = useNavigate();
 
@@ -60,9 +59,9 @@ const AddProduct = () => {
   };
 
   useEffect(() => {
-    let currentuser = JSON.parse(localStorage.getItem("currentuser"));
-    if (currentuser) {
-      if (currentuser?.role == "buyer") {
+    // let currentuser = JSON.parse(localStorage.getItem("currentuser"));
+    if (state?.currentuser) {
+      if (state?.currentuser?.role == "buyer") {
         toast.error("sorry You are not a seller");
         route("/");
       }

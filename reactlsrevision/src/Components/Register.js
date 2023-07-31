@@ -106,12 +106,13 @@ const Register = () => {
           <div
             style={{ display: "flex", alignItems: "center", margin: "1% 0" }}
           >
-            <p style={{ width: "20%" }}>Select Role :</p>
+            <p style={{ width: "20%", fontWeight: "bolder" }}>Select Role :</p>
             <select
               style={{
                 width: "80%",
                 height: "35px",
-                backgroundColor: "aliceblue",
+                backgroundColor: "aqua",
+                fontWeight: "bolder",
               }}
               onChange={handleRole}
             >

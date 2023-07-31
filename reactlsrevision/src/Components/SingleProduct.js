@@ -8,6 +8,13 @@ import { toast } from "react-hot-toast";
 const SingleProduct = () => {
   const { id } = useParams();
   const [singleProduct, setSingleProduct] = useState({});
+  const [updateProdContainer, setUpdateProdContainer] = useState(false);
+  const [prodDetails, setProdDetails] = useState({
+    img: "",
+    title: "",
+    price: "",
+    category: "other",
+  });
 
   const { state } = useContext(MyContext);
   const route = useNavigate();
@@ -16,7 +23,7 @@ const SingleProduct = () => {
     const getProduct = JSON.parse(localStorage.getItem("products"));
 
     if (getProduct) {
-      let prodId = getProduct.find((item) => item.id == id);
+      let prodId = getProduct.find((item) => item.id === id);
       setSingleProduct(prodId);
     }
   }, []);
@@ -36,9 +43,101 @@ const SingleProduct = () => {
     }
   };
 
+  const updateProductDetails = () => {
+    setUpdateProdContainer(true);
+  };
+
+  const closeUpdateProdContainer = () => {
+    setUpdateProdContainer(false);
+  };
+
+  function changeProdDetails(e) {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    setProdDetails({ ...prodDetails, [name]: value });
+  }
+
+  const changeProdDetailsCategory = (e) => {
+    const value = e.target.value;
+
+    setProdDetails({ ...prodDetails, ["category"]: value });
+  };
+
+  function handleSubmitProductUpdate(e) {
+    e.preventDefault();
+
+    const getProduct = JSON.parse(localStorage.getItem("products"));
+
+    for (let i = 0; i < getProduct.length; i++) {
+      if (getProduct[i].id === id) {
+        getProduct[i].image = prodDetails.img;
+        getProduct[i].title = prodDetails.title;
+        getProduct[i].price = prodDetails.price;
+        getProduct[i].category = prodDetails.category;
+        singleProduct.image = prodDetails.img;
+        singleProduct.title = prodDetails.title;
+        singleProduct.price = prodDetails.price;
+        singleProduct.category = prodDetails.category;
+
+        localStorage.setItem("products", JSON.stringify(getProduct));
+        toast.success("updated success");
+        setUpdateProdContainer(false);
+      }
+    }
+  }
+
   return (
     <>
       <Navbar />
+
+      {updateProdContainer ? (
+        <div className="updateProductContainerInputs">
+          <div
+            className="closeUpdateProdContainer"
+            onClick={closeUpdateProdContainer}
+          >
+            X
+          </div>
+          <form onSubmit={handleSubmitProductUpdate}>
+            <div className="updateProdInputs">
+              <input
+                type="text"
+                onChange={changeProdDetails}
+                name="img"
+                placeholder="update image url"
+                value={prodDetails.img}
+              />
+              <input
+                type="text"
+                onChange={changeProdDetails}
+                name="title"
+                placeholder="update Title"
+                value={prodDetails.title}
+              />
+              <input
+                type="text"
+                onChange={changeProdDetails}
+                name="price"
+                placeholder="update price"
+                value={prodDetails.price}
+              />
+              <select
+                value={prodDetails.category}
+                onChange={changeProdDetailsCategory}
+              >
+                <option value="Other">Other</option>
+                <option value="Mens">Mens</option>
+                <option value="Womens">Womens</option>
+                <option value="Kids">Kids</option>
+                <option value="Fashion">Fashion</option>
+                <option value="Accessories">Accessories</option>
+              </select>
+              <button>Update product</button>
+            </div>
+          </form>
+        </div>
+      ) : null}
       <div style={{ display: "flex", marginTop: "2%" }}>
         <div style={{ width: "60%" }}>
           <div style={{ width: "60%", margin: "auto" }}>
@@ -70,6 +169,24 @@ const SingleProduct = () => {
               add to cart
             </button>
           ) : null}
+
+          {state?.currentuser && state?.currentuser?.role === "seller" && (
+            <div>
+              <button
+                style={{
+                  width: "70%",
+                  height: "50px",
+                  backgroundColor: "orangered",
+                  fontSize: "22px",
+                  fontWeight: "bolder",
+                  color: "white",
+                }}
+                onClick={updateProductDetails}
+              >
+                Update Product
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </>

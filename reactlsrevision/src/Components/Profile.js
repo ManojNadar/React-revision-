@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import { useNavigate } from "react-router-dom";
 import { MyContext } from "../MyContext/MyContext";
+import { toast } from "react-hot-toast";
 
 const Profile = () => {
   const { state, login } = useContext(MyContext);
@@ -49,7 +50,7 @@ const Profile = () => {
                   JSON.stringify(currentuser)
                 );
                 login(currentuser);
-                alert("updated successfully");
+                toast.success("updated successfully");
                 setUpdateProfile({ name: "", password: "", cPassword: "" });
                 setProfileModal(false);
               }

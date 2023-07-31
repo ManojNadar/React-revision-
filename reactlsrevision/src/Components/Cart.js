@@ -116,7 +116,7 @@ const Cart = () => {
           )}
         </div>
       ) : (
-        <div className="noCart">
+        <div style={{ textAlign: "center" }} className="noCart">
           <h1>Please Login to see your Cart</h1>
         </div>
       )}
