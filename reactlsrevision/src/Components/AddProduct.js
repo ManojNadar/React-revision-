@@ -3,6 +3,7 @@ import Navbar from "./Navbar";
 import { MyContext } from "../MyContext/MyContext";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
+import { toast } from "react-hot-toast";
 
 const AddProduct = () => {
   const [prodDetails, setProdDetails] = useState({
@@ -40,7 +41,7 @@ const AddProduct = () => {
 
       getProduct.push(prodObj);
       localStorage.setItem("products", JSON.stringify(getProduct));
-      alert("product added successfully");
+      toast.success("product added successfully");
       setProdDetails({
         image: "",
         title: "",
@@ -48,7 +49,7 @@ const AddProduct = () => {
         category: "Other",
       });
     } else {
-      alert("please fill all the fields");
+      toast.error("please fill all the fields");
       setProdDetails({
         image: "",
         title: "",
@@ -62,12 +63,12 @@ const AddProduct = () => {
     let currentuser = JSON.parse(localStorage.getItem("currentuser"));
     if (currentuser) {
       if (currentuser?.role == "buyer") {
-        alert("sorry You are not a seller");
+        toast.error("sorry You are not a seller");
         route("/");
       }
     } else {
       route("/login");
-      alert("Login First as a seller");
+      toast.error("Login First as a seller");
     }
   }, []);
 

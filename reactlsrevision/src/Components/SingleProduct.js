@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import Navbar from "./Navbar";
 import { MyContext } from "../MyContext/MyContext";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 const SingleProduct = () => {
   const { id } = useParams();
@@ -10,8 +11,6 @@ const SingleProduct = () => {
 
   const { state } = useContext(MyContext);
   const route = useNavigate();
-
-  //   console.log(singleProduct);
 
   useEffect(() => {
     const getProduct = JSON.parse(localStorage.getItem("products"));
@@ -30,7 +29,7 @@ const SingleProduct = () => {
         if (regUser[i].regEmail === state.currentuser.regEmail) {
           regUser[i].cart.push(singleProduct);
           localStorage.setItem("registerUser", JSON.stringify(regUser));
-          alert("product added");
+          toast.success("product added");
           route("/products");
         }
       }
@@ -57,7 +56,7 @@ const SingleProduct = () => {
           <h3>{singleProduct.category}</h3>
           <br />
 
-          {state?.currentuser ? (
+          {state?.currentuser?.role === "buyer" ? (
             <button
               style={{
                 width: "70%",

@@ -43,9 +43,13 @@ const Navbar = () => {
                 Add Product
               </NavLink>
             ) : null}
-            <NavLink to="/cart" className="navigations">
-              Cart
-            </NavLink>
+
+            {data?.role === "seller" ? null : (
+              <NavLink to="/cart" className="navigations">
+                Cart
+              </NavLink>
+            )}
+
             <button onClick={() => logout()} className="navigations">
               Logout
             </button>

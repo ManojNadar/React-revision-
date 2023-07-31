@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { MyContext } from "../MyContext/MyContext";
+import { toast } from "react-hot-toast";
 
 const Login = () => {
   const [loginData, setLoginData] = useState({
@@ -38,17 +39,17 @@ const Login = () => {
 
       if (flag) {
         login(currentuser);
-        alert("login success");
+        toast.success("login success");
         route("/");
       } else {
-        alert("invalid credentials");
+        toast.error("invalid credentials");
         setLoginData({
           loginEmail: "",
           loginPassword: "",
         });
       }
     } else {
-      alert("please fill all the fields");
+      toast.error("please fill all the fields");
     }
   };
 

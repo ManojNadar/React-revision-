@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 const Register = () => {
   const [regUser, setRegUser] = useState({
@@ -43,7 +44,7 @@ const Register = () => {
             };
             getUser.push(userObj);
             localStorage.setItem("registerUser", JSON.stringify(getUser));
-            alert("registered Successfully done");
+            toast.success("registered Successfully done");
             route("/login");
 
             setRegUser({
@@ -53,17 +54,17 @@ const Register = () => {
               regConfirmPassword: "",
             });
           } else {
-            alert("user already registered please try login");
+            toast("user already registered please try login");
             route("/login");
           }
         } else {
-          alert("password doesnot match");
+          toast.error("password doesnot match");
         }
       } else {
-        alert("password must be atleast 7 characters or more");
+        toast.error("password must be atleast 7 characters or more");
       }
     } else {
-      alert("please fill all the fields");
+      toast.error("please fill all the fields");
       setRegUser({
         regName: "",
         regEmail: "",

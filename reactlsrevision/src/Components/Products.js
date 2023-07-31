@@ -7,6 +7,8 @@ const Products = () => {
   const [products, setProducts] = useState([]);
   const [isProductsExist, setIsProductsExist] = useState(false);
 
+  const { state } = useContext(MyContext);
+
   const route = useNavigate();
 
   useEffect(() => {
@@ -57,6 +59,20 @@ const Products = () => {
                 <h4>{item.title}</h4>
                 <h2>Rs.{item.price}</h2>
                 <h3>Category :{item.category}</h3>
+
+                {state?.currentuser?.role === "seller" && (
+                  <button
+                    className="updateProdBtn"
+                    style={{
+                      marginTop: "3%",
+                      backgroundColor: "aqua",
+                      width: "50%",
+                      height: "35px",
+                    }}
+                  >
+                    UPDATE PRODUCT
+                  </button>
+                )}
               </div>
             ))
           ) : (

@@ -8,15 +8,43 @@ import { BrowserRouter } from "react-router-dom";
 
 import MyContextProvider from "./MyContext/MyContext";
 
+import { Toaster } from "react-hot-toast";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <MyContextProvider>
-    <BrowserRouter>
-      <React.StrictMode>
+  <React.StrictMode>
+    <MyContextProvider>
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+        gutter={8}
+        containerClassName=""
+        containerStyle={{}}
+        toastOptions={{
+          // Define default options
+          className: "",
+          duration: 5000,
+          style: {
+            background: "#363636",
+            color: "#fff",
+          },
+
+          // Default options for specific types
+          success: {
+            duration: 3000,
+            theme: {
+              primary: "green",
+              secondary: "black",
+            },
+          },
+        }}
+      />
+
+      <BrowserRouter>
         <App />
-      </React.StrictMode>
-    </BrowserRouter>
-  </MyContextProvider>
+      </BrowserRouter>
+    </MyContextProvider>
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
