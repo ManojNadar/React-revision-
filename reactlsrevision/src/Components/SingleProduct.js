@@ -28,7 +28,7 @@ const SingleProduct = () => {
     }
   }, []);
 
-  const addToCart = (id) => {
+  const addToCart = () => {
     const regUser = JSON.parse(localStorage.getItem("registerUser"));
 
     if (state?.currentuser) {
@@ -49,6 +49,12 @@ const SingleProduct = () => {
 
   const closeUpdateProdContainer = () => {
     setUpdateProdContainer(false);
+    setProdDetails({
+      img: "",
+      title: "",
+      price: "",
+      category: "other",
+    });
   };
 
   function changeProdDetails(e) {
@@ -60,7 +66,6 @@ const SingleProduct = () => {
 
   const changeProdDetailsCategory = (e) => {
     const value = e.target.value;
-
     setProdDetails({ ...prodDetails, ["category"]: value });
   };
 
