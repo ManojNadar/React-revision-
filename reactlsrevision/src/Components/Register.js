@@ -9,7 +9,7 @@ const Register = () => {
     regPassword: "",
     regConfirmPassword: "",
     cart: [],
-    role: "buyer",
+    role: "buyer",  
   });
 
   const route = useNavigate();
@@ -17,9 +17,13 @@ const Register = () => {
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-
     setRegUser({ ...regUser, [name]: value });
   };
+
+  function handleRole(e) {
+    const value = e.target.value;
+    setRegUser({ ...regUser, ["role"]: value });
+  }
 
   const { regName, regEmail, regPassword, regConfirmPassword, role } = regUser;
 
@@ -33,11 +37,13 @@ const Register = () => {
             JSON.parse(localStorage.getItem("registerUser")) || [];
 
           let flag = false;
+
           for (let i = 0; i < getUser.length; i++) {
-            if (getUser[i].regEmail === regUser.regEmail) {
+            if (getUser[i].regEmail === regEmail) {
               flag = true;
             }
           }
+
           if (!flag) {
             const userObj = {
               ...regUser,
@@ -74,12 +80,7 @@ const Register = () => {
     }
   };
 
-  function handleRole(e) {
-    const value = e.target.value;
-    setRegUser({ ...regUser, ["role"]: value });
-  }
-
-  console.log(regUser);
+  // console.log(regUser);
 
   return (
     <div className="registerScreen">
