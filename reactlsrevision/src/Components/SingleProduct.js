@@ -36,7 +36,7 @@ const SingleProduct = () => {
           // Do not add Duplicate items
           if (regUser[i].cart.length && duplicate) {
             toast("product already added");
-            route("/products");
+            route("/cart");
           } else {
             regUser[i].cart.push(singleProduct);
             localStorage.setItem("registerUser", JSON.stringify(regUser));
@@ -72,17 +72,13 @@ const SingleProduct = () => {
     e.preventDefault();
 
     const getProduct = JSON.parse(localStorage.getItem("products"));
-
+    //eslint
     for (let i = 0; i < getProduct.length; i++) {
       if (getProduct[i].id === id) {
         getProduct[i].image = singleProduct.image;
         getProduct[i].title = singleProduct.title;
         getProduct[i].price = singleProduct.price;
         getProduct[i].category = singleProduct.category;
-        singleProduct.image = singleProduct.image;
-        singleProduct.title = singleProduct.title;
-        singleProduct.price = singleProduct.price;
-        singleProduct.category = singleProduct.category;
 
         localStorage.setItem("products", JSON.stringify(getProduct));
         toast.success("updated success");
