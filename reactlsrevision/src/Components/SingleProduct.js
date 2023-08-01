@@ -13,7 +13,7 @@ const SingleProduct = () => {
   const { state } = useContext(MyContext);
   const route = useNavigate();
 
-  console.log(singleProduct);
+  // console.log(singleProduct);
 
   useEffect(() => {
     const getProduct = JSON.parse(localStorage.getItem("products"));
@@ -24,16 +24,25 @@ const SingleProduct = () => {
     }
   }, []);
 
-  const addToCart = () => {
+  const addToCart = (id) => {
     const regUser = JSON.parse(localStorage.getItem("registerUser"));
 
     if (state?.currentuser) {
       for (let i = 0; i < regUser.length; i++) {
         if (regUser[i].regEmail === state.currentuser.regEmail) {
-          regUser[i].cart.push(singleProduct);
-          localStorage.setItem("registerUser", JSON.stringify(regUser));
-          toast.success("product added");
-          route("/products");
+          const duplicate = regUser[i].cart.find((e) => e.id === id);
+
+          // console.log(duplicate);
+          // Do not add Duplicate items
+          if (regUser[i].cart.length && duplicate) {
+            toast("product already added");
+            route("/products");
+          } else {
+            regUser[i].cart.push(singleProduct);
+            localStorage.setItem("registerUser", JSON.stringify(regUser));
+            toast.success("product added");
+            route("/products");
+          }
         }
       }
     }
