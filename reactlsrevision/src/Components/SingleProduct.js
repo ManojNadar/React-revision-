@@ -9,15 +9,11 @@ const SingleProduct = () => {
   const { id } = useParams();
   const [singleProduct, setSingleProduct] = useState({});
   const [updateProdContainer, setUpdateProdContainer] = useState(false);
-  const [prodDetails, setProdDetails] = useState({
-    img: "",
-    title: "",
-    price: "",
-    category: "other",
-  });
 
   const { state } = useContext(MyContext);
   const route = useNavigate();
+
+  console.log(singleProduct);
 
   useEffect(() => {
     const getProduct = JSON.parse(localStorage.getItem("products"));
@@ -49,24 +45,18 @@ const SingleProduct = () => {
 
   const closeUpdateProdContainer = () => {
     setUpdateProdContainer(false);
-    setProdDetails({
-      img: "",
-      title: "",
-      price: "",
-      category: "other",
-    });
   };
 
   function changeProdDetails(e) {
     const name = e.target.name;
     const value = e.target.value;
 
-    setProdDetails({ ...prodDetails, [name]: value });
+    setSingleProduct({ ...singleProduct, [name]: value });
   }
 
   const changeProdDetailsCategory = (e) => {
     const value = e.target.value;
-    setProdDetails({ ...prodDetails, ["category"]: value });
+    setSingleProduct({ ...singleProduct, ["category"]: value });
   };
 
   function handleSubmitProductUpdate(e) {
@@ -76,14 +66,14 @@ const SingleProduct = () => {
 
     for (let i = 0; i < getProduct.length; i++) {
       if (getProduct[i].id === id) {
-        getProduct[i].image = prodDetails.img;
-        getProduct[i].title = prodDetails.title;
-        getProduct[i].price = prodDetails.price;
-        getProduct[i].category = prodDetails.category;
-        singleProduct.image = prodDetails.img;
-        singleProduct.title = prodDetails.title;
-        singleProduct.price = prodDetails.price;
-        singleProduct.category = prodDetails.category;
+        getProduct[i].image = singleProduct.image;
+        getProduct[i].title = singleProduct.title;
+        getProduct[i].price = singleProduct.price;
+        getProduct[i].category = singleProduct.category;
+        singleProduct.image = singleProduct.image;
+        singleProduct.title = singleProduct.title;
+        singleProduct.price = singleProduct.price;
+        singleProduct.category = singleProduct.category;
 
         localStorage.setItem("products", JSON.stringify(getProduct));
         toast.success("updated success");
@@ -111,24 +101,24 @@ const SingleProduct = () => {
                 onChange={changeProdDetails}
                 name="img"
                 placeholder="update image url"
-                value={prodDetails.img}
+                value={singleProduct.image}
               />
               <input
                 type="text"
                 onChange={changeProdDetails}
                 name="title"
                 placeholder="update Title"
-                value={prodDetails.title}
+                value={singleProduct.title}
               />
               <input
                 type="text"
                 onChange={changeProdDetails}
                 name="price"
                 placeholder="update price"
-                value={prodDetails.price}
+                value={singleProduct.price}
               />
               <select
-                value={prodDetails.category}
+                value={singleProduct.category}
                 onChange={changeProdDetailsCategory}
               >
                 <option value="Other">Other</option>
