@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import { MyContext } from "../MyContext/MyContext";
+import Practice from "./practice";
 
 const Home = () => {
-  const [userHome, setuserHome] = useState();
+  const [userHome, setuserHome] = useState("rocky");
   const { state } = useContext(MyContext);
 
   useEffect(() => {
@@ -33,6 +34,7 @@ const Home = () => {
           alt=""
         />
       </div>
+      <Practice userHome={userHome} />
     </>
   );
 };
