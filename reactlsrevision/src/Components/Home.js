@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import { MyContext } from "../MyContext/MyContext";
-import Practice from "./practice";
+// import Practice from "./practice";
 
 const Home = () => {
   const [userHome, setuserHome] = useState("rocky");
@@ -13,11 +13,50 @@ const Home = () => {
     }
   }, []);
 
+  const [jsonData, setJsonData] = useState("");
+  const [keys, setKeys] = useState([]);
+
+  // console.log(keys);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    try {
+      const parsedData = JSON.parse(jsonData);
+
+      // console.log(parsedData);
+      setKeys(Object.keys(parsedData));
+    } catch (error) {
+      console.error("Invalid JSON data", error);
+    }
+  };
+
+  const handleInputChange = (event) => {
+    setJsonData(event.target.value);
+  };
+
   return (
     <>
       <Navbar />
 
-      <div className="homeContainer">
+      <div>
+        <form onSubmit={handleSubmit}>
+          <textarea
+            name="jsonData"
+            value={jsonData}
+            onChange={handleInputChange}
+          />
+          <button type="submit">Submit</button>
+        </form>
+        {keys.length > 0 && (
+          <ul>
+            {keys.map((key) => (
+              <li key={key}>{key}</li>
+            ))}
+          </ul>
+        )}
+      </div>
+
+      {/* <div className="homeContainer">
         {state?.currentuser?.role === "seller" ? (
           <h1>Seller Logged in</h1>
         ) : state?.currentuser?.role === "buyer" ? (
@@ -33,8 +72,8 @@ const Home = () => {
           src="https://img.freepik.com/free-vector/shopping-time-banner-with-realistic-map-cart-gift-bags-vector-illustration_548887-120.jpg"
           alt=""
         />
-      </div>
-      <Practice userHome={userHome} />
+      </div> */}
+      {/* <Practice userHome={userHome} /> */}
     </>
   );
 };
